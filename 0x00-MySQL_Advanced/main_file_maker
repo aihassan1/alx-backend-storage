@@ -1,0 +1,11 @@
+# The script takes two arguments: numberOfFiles and fileType.
+# This script creates a specified number of files with a given file type.
+
+numberOfFiles=$1
+fileType=$2
+
+for ((i=0; i<=numberOfFiles; i++))
+do 
+    touch "${i}-main.${fileType}"
+    chmod +x "${i}-main.${fileType}"
+done
