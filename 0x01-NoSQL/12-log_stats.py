@@ -17,7 +17,7 @@ number_of_GET_PATH = collection.count_documents(
 
 
 print(f"{number_of_docs} logs")
-print("Methods:")
+print("Methods: ")
 print(f"    method GET: {number_of_GET}")
 print(f"    method POST: {number_of_POST}")
 print(f"    method PUT: {number_of_PUT}")
