@@ -6,6 +6,8 @@ client = MongoClient()
 db = client["logs"]
 collection = db.nginx
 
+
+
 number_of_docs = collection.count_documents({})
 number_of_GET = collection.count_documents({"method": "GET"})
 number_of_POST = collection.count_documents({"method": "POST"})
