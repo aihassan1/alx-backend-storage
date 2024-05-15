@@ -4,5 +4,4 @@
 
 def schools_by_topic(mongo_collection, topic):
     query = {"topics": topic}
-    list_of_schools = mongo_collection.find(query)
-    return list_of_schools
+    return mongo_collection.find(query)

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     for j_school in j_schools:
         insert_school(school_collection, **j_school)
 
-    schools = schools_by_topic(school_collection, "C")
+    schools = schools_by_topic(school_collection, "Python")
     for school in schools:
         print(
             "[{}] {} {}".format(
