@@ -8,4 +8,4 @@ def update_topics(mongo_collection, name, topics):
     school document based on the name"""
     query = {"name": name}
     update_doc = {"$set": {"topics": topics}}
-    result = mongo_collection.update_one(query, update_doc)
+    mongo_collection.update_one(query, update_doc)
