@@ -5,14 +5,15 @@ Main file
 import redis
 
 Cache = __import__("exercise").Cache
+
 cache = Cache()
 
-TEST_CASES = {
-    b"foo": None,
-    123: int,
-    "bar": lambda d: d.decode("utf-8")
-}
+data = 155155
+key = cache.store(data)
+print(key)
 
-for value, fn in TEST_CASES.items():
-    key = cache.store(value)
-    assert cache.get(key, fn=fn) == value
+# local_redis = redis.Redis()
+# print(local_redis.get(key))
+
+value = cache.get(key, int)
+print(value)
