@@ -11,7 +11,7 @@ def count_calls(fn: Callable) -> Callable:
     key = fn.__qualname__
 
     @wraps(fn)
-    def wrapper(self, *args, **kwargs) -> Any:
+    def wrapper(self, *args, **kwargs)->Any:
         """Wraps called method and tracks its passed argument by storing
         the m to redis
         """
@@ -34,7 +34,7 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[callable] = None) -> Any:
+    def get(self, key: str, fn: Optional[Callable] = None) -> Any:
         """get function to get values from db"""
         if not key:
             return None
@@ -46,7 +46,7 @@ class Cache:
             return self.get_int(value)
         if fn is str:
             return self.get_str(value)
-        if fn is callable(fn):
+        if fn is callable(fn) and fn is not None:
             return fn(value)
 
         return value
