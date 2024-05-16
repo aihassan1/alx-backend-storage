@@ -2,6 +2,7 @@
 """ Cache class """
 import redis
 import uuid
+from typing import Union
 
 
 class Cache:
@@ -10,7 +11,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushall()
 
-    def store(self, data):
+    def store(self, data: Union[int, float, str, bytes]) -> str:
         """store data to cache"""
         key = str(uuid.uuid4())
         self._redis.set(key, data)
