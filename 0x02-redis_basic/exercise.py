@@ -8,10 +8,13 @@ from functools import wraps
 
 def count_calls(fn: Callable) -> Callable:
     """counts the number the method is called"""
+    key = fn.__qualname__
 
     @wraps(fn)
-    def wrapper(self, *args, **kwargs):
-        key = f"{fn.__qualname__}"
+    def wrapper(self, *args, **kwargs) -> str:
+        """Wraps called method and tracks its passed argument by storing
+        the m to redis
+        """
         self._redis.incr(key)
         return fn(self, *args, **kwargs)
 
@@ -39,7 +42,6 @@ class Cache:
         value = self._redis.get(key)
         if not value:
             return None
-
         if fn is int:
             return self.get_int(value)
         if fn is str:
