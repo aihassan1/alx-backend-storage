@@ -6,19 +6,17 @@ from typing import Any, Callable, Optional, Union
 from functools import wraps
 
 
-def count_calls(fn: Callable) -> Callable:
-    """counts the number the method is called"""
-    key = fn.__qualname__
+def count_calls(method: Callable) -> Callable:
+    """count number of calls made to a method"""
+    key = method.__qualname__
 
-    @wraps(fn)
-    def wrapper(self, *args, **kwargs)->Any:
-        """Wraps called method and tracks its passed argument by storing
-        the m to redis
-        """
+    @wraps(method)
+    def counter(self, *args, **kwargs):
+        """decorator method"""
         self._redis.incr(key)
-        return fn(self, *args, **kwargs)
+        return method(self, *args, **kwargs)
 
-    return wrapper
+    return counter
 
 
 class Cache:
