@@ -11,7 +11,7 @@ def count_calls(fn: Callable) -> Callable:
     key = fn.__qualname__
 
     @wraps(fn)
-    def wrapper(self, *args, **kwargs):
+    def wrapper(self, *args, **kwargs) -> Any:
         """Wraps called method and tracks its passed argument by storing
         the m to redis
         """
