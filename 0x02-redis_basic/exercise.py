@@ -6,12 +6,12 @@ from typing import Any, Callable, Optional, Union
 from functools import wraps
 
 
-def count_calls(fn: Callable[..., Any]) -> Callable[..., Any]:
+def count_calls(fn: Callable) -> Callable:
     """counts the number the method is called"""
     key = fn.__qualname__
-    
+
     @wraps(fn)
-    def wrapper(self, *args, **kwargs) -> str:
+    def wrapper(self, *args, **kwargs):
         """Wraps called method and tracks its passed argument by storing
         the m to redis
         """
