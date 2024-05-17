@@ -36,7 +36,7 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(method: Callable) -> None:
-    """function displays the history of calls of a particular function"""
+    """display the history of calls of a particular function."""
     key = method.__qualname__
     inputs = key + ":inputs"
     outputs = key + ":outputs"
@@ -52,6 +52,8 @@ def replay(method: Callable) -> None:
 
 
 class Cache:
+    """class cache"""
+
     def __init__(self):
         """the init function"""
         self._redis = redis.Redis()
