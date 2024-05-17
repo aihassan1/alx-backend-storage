@@ -19,11 +19,6 @@ def count_calls(method: Callable) -> Callable:
     return counter
 
 
-# DEFINE call history dicorator
-# input will be stored in a list
-# output will be stored in a list for each method
-
-
 def call_history(method: Callable) -> Callable:
     """store the history of inputs and outputs for a particular function."""
     input_key = method.__qualname__ + ":inputs"
@@ -38,6 +33,22 @@ def call_history(method: Callable) -> Callable:
         return output
 
     return history
+
+
+def replay(method: Callable) -> None:
+    """function displays the history of calls of a particular function"""
+    key = method.__qualname__
+    inputs = key + ":inputs"
+    outputs = key + ":outputs"
+    server = method.__self__._redis
+    count = server.get(key).decode("utf-8")
+    print(f"{key} was called {count} times:")
+    input_list = server.lrange(inputs, 0, -1)
+    output_list = server.lrange(outputs, 0, -1)
+    zipped = list(zip(input_list, output_list))
+    for k, v in zipped:
+        attr, result = k.decode("utf-8"), k.decode("utf-8")
+        print(f"{key}(*{attr}) -> {result}")
 
 
 class Cache:
