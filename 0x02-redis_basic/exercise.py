@@ -91,3 +91,10 @@ class Cache:
     def get_int(self, data):
         """returns an int"""
         return int(data.decode("utf-8"))
+
+
+cache = Cache()
+cache.store("foo")
+cache.store("bar")
+cache.store(42)
+replay(cache.store)
