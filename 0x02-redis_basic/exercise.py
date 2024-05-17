@@ -52,7 +52,7 @@ def replay(method: Callable) -> None:
 
 
 class Cache:
-    """class cache  for storing data in a Redis data storage."""
+    """class cache for storing data in a Redis data storage."""
 
     def __init__(self):
         """the init function"""
@@ -89,4 +89,5 @@ class Cache:
         return data.decode("utf-8")
 
     def get_int(self, data):
+        """returns an int"""
         return int(data.decode("utf-8"))
